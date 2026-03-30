@@ -9,6 +9,20 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .checkbox-grid label {
+      cursor: pointer;
+      user-select: none;
+    }
+    .checkbox-limit-msg {
+      display: none;
+      font-size: .8rem;
+      color: #c04a2c;
+      margin-top: .4rem;
+      font-weight: 500;
+    }
+    .checkbox-limit-msg.visible { display: block; }
+  </style>
 </head>
 <body>
   <header class="site-header slim-header">
@@ -26,35 +40,36 @@
       <section>
         <p class="section-label">Founder pilot application</p>
         <h1>Apply for the Repatriation Decision Sprint</h1>
-        <p class="lead">This pilot is designed for dual-career international professionals and families facing a real decision about staying abroad, returning home, or redesigning life across countries.</p>
+        <p class="lead">This pilot is for dual-career international professionals and families facing a real decision about staying abroad, returning home, or redesigning life across countries.</p>
 
-        <div class="card sidebar-note">
-          <h3>What happens next</h3>
-          <ol class="number-list">
-            <li>You submit your application.</li>
-            <li>You land on a thank-you page immediately.</li>
-            <li>The submission appears in your Netlify Forms dashboard after deployment.</li>
-            <li>You review fit manually and invite selected applicants.</li>
-          </ol>
+        <div class="card sidebar-note" style="margin-top:2rem">
+          <h3>What's included</h3>
+          <ul class="feature-list compact">
+            <li>Structured intake questionnaire</li>
+            <li>60-minute founder-led session</li>
+            <li>Tailored decision map</li>
+            <li>Three-scenario comparison: stay / return / redesign</li>
+            <li>Trade-off matrix across career, children, partner, money, identity, and family</li>
+            <li>Written next-step plan for the next 30 days</li>
+          </ul>
         </div>
 
-        <div class="card sidebar-note small-note">
-          <h3>What you will review</h3>
-          <ul class="feature-list compact">
-            <li>Countries involved</li>
-            <li>Dual-career dynamic</li>
-            <li>Children and schooling context</li>
-            <li>Urgency and level of friction</li>
-            <li>Willingness to join a paid pilot</li>
-          </ul>
+        <div class="card sidebar-note" style="margin-top:1rem">
+          <h3>Pilot pricing</h3>
+          <div class="price-stack" style="margin:.75rem 0 0">
+            <div><strong>€49</strong><span>First 5 participants</span></div>
+            <div><strong>€99</strong><span>Next 5 participants</span></div>
+            <div><strong>€149</strong><span>Final pilot slots</span></div>
+          </div>
+          <p class="small" style="margin-top:.75rem;color:var(--muted)">You apply first. You only pay if accepted.</p>
         </div>
       </section>
 
       <section class="card form-card">
-        <form name="pilot-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html">
+        <form name="pilot-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html" id="pilotForm">
           <input type="hidden" name="form-name" value="pilot-application" />
-          <p class="hidden-field">
-            <label>Do not fill this out if you're human: <input name="bot-field" /></label>
+          <p style="display:none">
+            <label>Do not fill this out: <input name="bot-field" /></label>
           </p>
 
           <div class="form-grid">
@@ -155,7 +170,8 @@
               <label><input type="checkbox" name="factors" value="Lifestyle"> Lifestyle</label>
               <label><input type="checkbox" name="factors" value="Immigration / legal status"> Immigration / legal status</label>
             </div>
-            <p class="help-text">Pick the top factors only. Keeping this tight makes the decision pattern easier to review later.</p>
+            <p class="checkbox-limit-msg" id="factorLimitMsg">Maximum 4 factors. Uncheck one before selecting another.</p>
+            <p class="help-text">Keeping this tight makes the decision pattern easier to work with in the session.</p>
           </fieldset>
 
           <div>
@@ -195,11 +211,23 @@
           </div>
 
           <button type="submit" class="btn full-width">Submit application</button>
-          <p class="help-text">After you deploy on Netlify, form submissions will appear in your Netlify project dashboard.</p>
         </form>
       </section>
     </div>
   </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Lifecraft</strong>
+        <p class="footer-copy">Structured decision support for globally mobile families.</p>
+      </div>
+      <div class="footer-links">
+        <a href="assessment.html">Assessment</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </div>
+  </footer>
 
   <script src="app.js"></script>
 </body>

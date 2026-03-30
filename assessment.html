@@ -9,6 +9,193 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .narrow-shell { max-width: 640px; }
+
+    /* Question cards */
+    .q-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.4rem 1.5rem;
+      margin-bottom: 1rem;
+      transition: border-color .2s;
+    }
+    .q-card:focus-within { border-color: var(--brand); }
+
+    .q-card label {
+      font-weight: 600;
+      font-size: .95rem;
+      color: var(--text);
+      display: block;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .q-card label .q-sub {
+      display: block;
+      font-weight: 400;
+      font-size: .82rem;
+      color: var(--muted);
+      margin-top: .25rem;
+    }
+
+    /* Option buttons */
+    .option-group {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .7rem 1rem;
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: .88rem;
+      color: var(--text);
+      background: var(--bg);
+      transition: all .15s;
+      user-select: none;
+    }
+
+    .option-btn:hover { border-color: var(--brand); background: var(--brand-soft); }
+
+    .option-btn.selected {
+      border-color: var(--brand);
+      background: var(--brand-soft);
+      font-weight: 600;
+    }
+
+    .option-radio {
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid var(--line);
+      border-radius: 50%;
+      flex-shrink: 0;
+      transition: all .15s;
+      position: relative;
+    }
+
+    .option-btn.selected .option-radio {
+      border-color: var(--brand);
+      background: var(--brand);
+    }
+
+    .option-btn.selected .option-radio::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      background: white;
+      border-radius: 50%;
+    }
+
+    /* Progress */
+    .assessment-progress {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .progress-track {
+      flex: 1;
+      height: 4px;
+      background: var(--line);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--brand);
+      border-radius: 2px;
+      transition: width .4s ease;
+    }
+
+    .progress-label {
+      font-size: .75rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* Submit */
+    .submit-row {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+
+    .submit-note {
+      font-size: .78rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* Result screen */
+    .result-screen { display: none; }
+    .result-screen.visible { display: block; }
+    .form-screen.hidden { display: none; }
+
+    .tension-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: var(--brand-soft);
+      border: 1px solid rgba(28,92,76,.15);
+      color: var(--brand-dark);
+      padding: .35rem .75rem;
+      border-radius: 99px;
+      font-size: .8rem;
+      font-weight: 500;
+      margin: .2rem;
+    }
+
+    .score-band {
+      display: inline-block;
+      padding: .3rem .9rem;
+      border-radius: 99px;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .score-high { background: #fdecea; color: #b93b2b; }
+    .score-mid  { background: #fef3e2; color: #a05c15; }
+    .score-low  { background: var(--brand-soft); color: var(--brand-dark); }
+
+    .result-insight {
+      background: var(--surface-alt);
+      border-radius: 14px;
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .result-insight h3 {
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--brand);
+      margin-bottom: .6rem;
+    }
+
+    .result-insight p {
+      font-size: .9rem;
+      color: var(--text);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      .option-btn { font-size: .84rem; }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header slim-header">
@@ -22,46 +209,155 @@
 
   <main class="section">
     <div class="container narrow-shell">
-      <p class="section-label">5-minute assessment</p>
-      <h1>What is really making this decision hard?</h1>
-      <p class="lead">Answer six questions and get a simple read on the tensions likely driving your repatriation decision.</p>
 
-      <form class="card form-card" id="assessmentForm">
-        <div class="question-block">
-          <label for="alignment">How misaligned do you and your partner feel right now?</label>
-          <input id="alignment" name="alignment" type="range" min="1" max="5" value="3" />
-          <div class="range-value"><span id="alignmentValue">3</span>/5</div>
-        </div>
-        <div class="question-block">
-          <label for="schooling">How central are children or schooling considerations?</label>
-          <input id="schooling" name="schooling" type="range" min="1" max="5" value="3" />
-          <div class="range-value"><span id="schoolingValue">3</span>/5</div>
-        </div>
-        <div class="question-block">
-          <label for="career">How difficult is the career trade-off?</label>
-          <input id="career" name="career" type="range" min="1" max="5" value="3" />
-          <div class="range-value"><span id="careerValue">3</span>/5</div>
-        </div>
-        <div class="question-block">
-          <label for="support">How strongly does proximity to family or support network matter?</label>
-          <input id="support" name="support" type="range" min="1" max="5" value="3" />
-          <div class="range-value"><span id="supportValue">3</span>/5</div>
-        </div>
-        <div class="question-block">
-          <label for="identity">How much is identity or belonging part of the decision?</label>
-          <input id="identity" name="identity" type="range" min="1" max="5" value="3" />
-          <div class="range-value"><span id="identityValue">3</span>/5</div>
-        </div>
-        <div class="question-block">
-          <label for="urgency">How urgent does this feel now?</label>
-          <input id="urgency" name="urgency" type="range" min="1" max="5" value="3" />
-          <div class="range-value"><span id="urgencyValue">3</span>/5</div>
+      <!-- FORM SCREEN -->
+      <div class="form-screen" id="formScreen">
+        <p class="section-label">5-minute assessment</p>
+        <h1>What is really making this decision hard?</h1>
+        <p class="lead">Six questions. Honest answers. You'll get a read on the tensions most likely driving your situation — and whether a structured sprint makes sense.</p>
+
+        <div class="assessment-progress" style="margin-top:1.5rem">
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill" style="width:0%"></div>
+          </div>
+          <span class="progress-label" id="progressLabel">0 of 6</span>
         </div>
 
-        <button type="submit" class="btn full-width">See my assessment summary</button>
-      </form>
+        <form id="assessmentForm">
+
+          <div class="q-card">
+            <label for="alignment">
+              How aligned are you and your partner on what to do?
+              <span class="q-sub">Think about the last conversation you had about this decision.</span>
+            </label>
+            <div class="option-group" data-field="alignment">
+              <div class="option-btn" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div>Fully aligned — we want the same thing</div>
+              <div class="option-btn" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div>Mostly aligned with some tension</div>
+              <div class="option-btn" data-value="3" onclick="selectOption(this)"><div class="option-radio"></div>Partially aligned — one issue we can't resolve</div>
+              <div class="option-btn" data-value="4" onclick="selectOption(this)"><div class="option-radio"></div>Misaligned on the core question</div>
+              <div class="option-btn" data-value="5" onclick="selectOption(this)"><div class="option-radio"></div>Deeply misaligned — this is a real source of conflict</div>
+            </div>
+            <input type="hidden" name="alignment" id="alignment" required />
+          </div>
+
+          <div class="q-card">
+            <label for="career">
+              How difficult is the career trade-off?
+              <span class="q-sub">Consider what each option means for both careers, not just one.</span>
+            </label>
+            <div class="option-group" data-field="career">
+              <div class="option-btn" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div>No real trade-off — careers work in either location</div>
+              <div class="option-btn" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div>Minor trade-off — manageable with some adjustment</div>
+              <div class="option-btn" data-value="3" onclick="selectOption(this)"><div class="option-radio"></div>Significant trade-off for one partner</div>
+              <div class="option-btn" data-value="4" onclick="selectOption(this)"><div class="option-radio"></div>Major trade-off — one career would take a real hit</div>
+              <div class="option-btn" data-value="5" onclick="selectOption(this)"><div class="option-radio"></div>Irreconcilable — every option harms one of us professionally</div>
+            </div>
+            <input type="hidden" name="career" id="career" required />
+          </div>
+
+          <div class="q-card">
+            <label for="schooling">
+              How central are children or schooling considerations?
+              <span class="q-sub">Even if you don't have children yet, include future plans if relevant.</span>
+            </label>
+            <div class="option-group" data-field="schooling">
+              <div class="option-btn" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div>Not relevant — no children or schooling isn't a factor</div>
+              <div class="option-btn" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div>Relevant but manageable — good options in either place</div>
+              <div class="option-btn" data-value="3" onclick="selectOption(this)"><div class="option-radio"></div>Important — school timing or curriculum is shaping the timeline</div>
+              <div class="option-btn" data-value="4" onclick="selectOption(this)"><div class="option-radio"></div>Very important — children's stability is a central concern</div>
+              <div class="option-btn" data-value="5" onclick="selectOption(this)"><div class="option-radio"></div>Decisive — schooling is one of the hardest parts of this decision</div>
+            </div>
+            <input type="hidden" name="schooling" id="schooling" required />
+          </div>
+
+          <div class="q-card">
+            <label for="support">
+              How strongly does proximity to family or support network matter?
+              <span class="q-sub">Ageing parents, siblings, close friends — the people you can't easily replace.</span>
+            </label>
+            <div class="option-group" data-field="support">
+              <div class="option-btn" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div>Doesn't matter much — we're comfortable at a distance</div>
+              <div class="option-btn" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div>Matters, but not urgent</div>
+              <div class="option-btn" data-value="3" onclick="selectOption(this)"><div class="option-radio"></div>Matters — it's a real factor in the trade-off</div>
+              <div class="option-btn" data-value="4" onclick="selectOption(this)"><div class="option-radio"></div>Matters a lot — distance is taking a toll</div>
+              <div class="option-btn" data-value="5" onclick="selectOption(this)"><div class="option-radio"></div>Critical — proximity to family is the main reason we're reconsidering</div>
+            </div>
+            <input type="hidden" name="support" id="support" required />
+          </div>
+
+          <div class="q-card">
+            <label for="identity">
+              How much is identity or belonging part of this?
+              <span class="q-sub">"Where is home?" "Who am I here vs. there?" "Which version of myself do I want to be?"</span>
+            </label>
+            <div class="option-group" data-field="identity">
+              <div class="option-btn" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div>Not much — this is more practical than existential</div>
+              <div class="option-btn" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div>A little — occasionally comes up but not dominant</div>
+              <div class="option-btn" data-value="3" onclick="selectOption(this)"><div class="option-radio"></div>Noticeably — I think about it more than I expected</div>
+              <div class="option-btn" data-value="4" onclick="selectOption(this)"><div class="option-radio"></div>Quite a lot — it's underneath most of the other tensions</div>
+              <div class="option-btn" data-value="5" onclick="selectOption(this)"><div class="option-radio"></div>Central — I'm not sure who I am outside of where I live</div>
+            </div>
+            <input type="hidden" name="identity" id="identity" required />
+          </div>
+
+          <div class="q-card">
+            <label for="urgency">
+              How urgent does this feel right now?
+              <span class="q-sub">Not how urgent it should be — how urgent it actually feels.</span>
+            </label>
+            <div class="option-group" data-field="urgency">
+              <div class="option-btn" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div>Not urgent — I'm exploring early</div>
+              <div class="option-btn" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div>Moderate — I want clarity in the next year</div>
+              <div class="option-btn" data-value="3" onclick="selectOption(this)"><div class="option-radio"></div>Meaningful — a decision in the next 6 months would help</div>
+              <div class="option-btn" data-value="4" onclick="selectOption(this)"><div class="option-radio"></div>High — the decision is affecting how I'm living right now</div>
+              <div class="option-btn" data-value="5" onclick="selectOption(this)"><div class="option-radio"></div>Very high — I need to move on this in the next few months</div>
+            </div>
+            <input type="hidden" name="urgency" id="urgency" required />
+          </div>
+
+          <div class="submit-row">
+            <button type="submit" class="btn full-width" id="submitBtn" disabled>See my assessment summary →</button>
+            <p class="submit-note" id="submitNote">Answer all 6 questions to continue</p>
+          </div>
+        </form>
+      </div>
+
+      <!-- RESULT SCREEN -->
+      <div class="result-screen" id="resultScreen">
+        <p class="section-label">Assessment summary</p>
+        <h1 id="resultHeadline">—</h1>
+        <span class="score-band" id="scoreBand">—</span>
+        <p class="lead" id="resultSummary">—</p>
+
+        <div id="tensionTags" style="margin-bottom:1.5rem"></div>
+
+        <div id="resultInsights"></div>
+
+        <div class="card" style="padding:1.5rem;margin-top:1.5rem;background:var(--brand);color:white;border:none">
+          <h3 style="color:white;margin-bottom:.5rem" id="ctaHeadline">—</h3>
+          <p style="color:rgba(255,255,255,.8);font-size:.9rem;margin-bottom:1.2rem" id="ctaCopy">—</p>
+          <div class="actions">
+            <a class="btn btn-light" href="apply.html">Apply for the pilot</a>
+            <a class="btn btn-secondary" href="assessment.html" style="background:rgba(255,255,255,.15);color:white;border-color:rgba(255,255,255,.3)">Retake assessment</a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Lifecraft</strong>
+        <p class="footer-copy">Structured decision support for globally mobile families.</p>
+      </div>
+      <div class="footer-links">
+        <a href="apply.html">Apply</a>
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </div>
+  </footer>
 
   <script src="app.js"></script>
 </body>
