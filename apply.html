@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apply | Lifecraft Pilot</title>
+  <meta name="description" content="Apply for the Lifecraft founder pilot for dual-career international families facing a repatriation decision." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header slim-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">Lifecraft</a>
+      <nav class="nav-links" aria-label="Secondary">
+        <a class="nav-link" href="assessment.html">Assessment</a>
+        <a class="nav-link" href="privacy.html">Privacy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container form-layout">
+      <section>
+        <p class="section-label">Founder pilot application</p>
+        <h1>Apply for the Repatriation Decision Sprint</h1>
+        <p class="lead">This pilot is designed for dual-career international professionals and families facing a real decision about staying abroad, returning home, or redesigning life across countries.</p>
+
+        <div class="card sidebar-note">
+          <h3>What happens next</h3>
+          <ol class="number-list">
+            <li>You submit your application.</li>
+            <li>You land on a thank-you page immediately.</li>
+            <li>The submission appears in your Netlify Forms dashboard after deployment.</li>
+            <li>You review fit manually and invite selected applicants.</li>
+          </ol>
+        </div>
+
+        <div class="card sidebar-note small-note">
+          <h3>What you will review</h3>
+          <ul class="feature-list compact">
+            <li>Countries involved</li>
+            <li>Dual-career dynamic</li>
+            <li>Children and schooling context</li>
+            <li>Urgency and level of friction</li>
+            <li>Willingness to join a paid pilot</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="card form-card">
+        <form name="pilot-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html" id="pilotForm">
+          <input type="hidden" name="form-name" value="pilot-application" />
+          <p class="hidden-field">
+            <label>Do not fill this out if you're human: <input name="bot-field" /></label>
+          </p>
+
+          <div class="form-grid">
+            <div>
+              <label for="name">Full name</label>
+              <input id="name" name="name" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required />
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div>
+              <label for="currentCountry">Current country of residence</label>
+              <input id="currentCountry" name="currentCountry" required />
+            </div>
+            <div>
+              <label for="homeCountry">Home country / nationality</label>
+              <input id="homeCountry" name="homeCountry" required />
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div>
+              <label for="partnerMode">Applying as</label>
+              <select id="partnerMode" name="partnerMode" required>
+                <option value="">Select</option>
+                <option>One partner</option>
+                <option>Both partners</option>
+              </select>
+            </div>
+            <div>
+              <label for="countries">Countries you are deciding between</label>
+              <input id="countries" name="countries" placeholder="e.g. Singapore and France" required />
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div>
+              <label for="careers">Are both partners currently working?</label>
+              <select id="careers" name="careers" required>
+                <option value="">Select</option>
+                <option>Yes, both</option>
+                <option>One currently</option>
+                <option>One planning to return to work</option>
+              </select>
+            </div>
+            <div>
+              <label for="timeline">By when do you need clarity?</label>
+              <select id="timeline" name="timeline" required>
+                <option value="">Select</option>
+                <option>Within 3 months</option>
+                <option>Within 6 months</option>
+                <option>Within 12 months</option>
+                <option>Later than 12 months</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div>
+              <label for="childrenCount">Number of children</label>
+              <input id="childrenCount" name="childrenCount" type="number" min="0" value="0" required />
+            </div>
+            <div>
+              <label for="childrenAges">Ages of children</label>
+              <input id="childrenAges" name="childrenAges" placeholder="e.g. 5, 8" />
+            </div>
+          </div>
+
+          <div>
+            <label for="decisionType">Which best describes your situation?</label>
+            <select id="decisionType" name="decisionType" required>
+              <option value="">Select</option>
+              <option>Stay abroad</option>
+              <option>Repatriate</option>
+              <option>Redesign life across two countries</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="decision">In one sentence, what decision are you trying to make?</label>
+            <textarea id="decision" name="decision" rows="3" required></textarea>
+          </div>
+
+          <fieldset>
+            <legend>Which factors matter most? Pick up to 4</legend>
+            <div class="checkbox-grid">
+              <label><input type="checkbox" name="factors" value="Career progression"> Career progression</label>
+              <label><input type="checkbox" name="factors" value="Partner career"> Partner career</label>
+              <label><input type="checkbox" name="factors" value="Children / schooling"> Children / schooling</label>
+              <label><input type="checkbox" name="factors" value="Proximity to family"> Proximity to family</label>
+              <label><input type="checkbox" name="factors" value="Finances"> Finances</label>
+              <label><input type="checkbox" name="factors" value="Identity / belonging"> Identity / belonging</label>
+              <label><input type="checkbox" name="factors" value="Lifestyle"> Lifestyle</label>
+              <label><input type="checkbox" name="factors" value="Immigration / legal status"> Immigration / legal status</label>
+            </div>
+            <p class="help-text">Pick the top factors only. Keeping this tight makes the decision pattern easier to review later.</p>
+          </fieldset>
+
+          <div>
+            <label for="hard">What has made this decision hard so far?</label>
+            <textarea id="hard" name="hard" rows="3" required></textarea>
+          </div>
+
+          <div>
+            <label for="tried">What have you already tried?</label>
+            <textarea id="tried" name="tried" rows="2" placeholder="e.g. partner discussions, ChatGPT, coach, journaling"></textarea>
+          </div>
+
+          <div class="form-grid">
+            <div>
+              <label for="stuck">How stuck do you feel? <span id="stuckValue">5</span>/10</label>
+              <input id="stuck" name="stuck" type="range" min="1" max="10" value="5" />
+            </div>
+            <div>
+              <label for="importance">How important is it to make progress now? <span id="importanceValue">7</span>/10</label>
+              <input id="importance" name="importance" type="range" min="1" max="10" value="7" />
+            </div>
+          </div>
+
+          <div>
+            <label for="paid">Would you be willing to join a paid pilot if selected?</label>
+            <select id="paid" name="paid" required>
+              <option value="">Select</option>
+              <option>Yes, at €49</option>
+              <option>Maybe, depending on fit</option>
+              <option>No</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="outcome">What would a useful outcome from this sprint look like for you?</label>
+            <textarea id="outcome" name="outcome" rows="3"></textarea>
+          </div>
+
+          <button type="submit" class="btn full-width">Submit application</button>
+          <p class="help-text">After you deploy on Netlify, form submissions will appear in your Netlify project dashboard.</p>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

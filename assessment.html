@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assessment | Lifecraft</title>
+  <meta name="description" content="Take a 5-minute decision assessment for your repatriation choice." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header slim-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">Lifecraft</a>
+      <nav class="nav-links">
+        <a class="nav-link" href="apply.html">Apply</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container narrow-shell">
+      <p class="section-label">5-minute assessment</p>
+      <h1>What is really making this decision hard?</h1>
+      <p class="lead">Answer six questions and get a simple read on the tensions likely driving your repatriation decision.</p>
+
+      <form class="card form-card" id="assessmentForm">
+        <div class="question-block">
+          <label for="alignment">How misaligned do you and your partner feel right now?</label>
+          <input id="alignment" name="alignment" type="range" min="1" max="5" value="3" />
+          <div class="range-value"><span id="alignmentValue">3</span>/5</div>
+        </div>
+        <div class="question-block">
+          <label for="schooling">How central are children or schooling considerations?</label>
+          <input id="schooling" name="schooling" type="range" min="1" max="5" value="3" />
+          <div class="range-value"><span id="schoolingValue">3</span>/5</div>
+        </div>
+        <div class="question-block">
+          <label for="career">How difficult is the career trade-off?</label>
+          <input id="career" name="career" type="range" min="1" max="5" value="3" />
+          <div class="range-value"><span id="careerValue">3</span>/5</div>
+        </div>
+        <div class="question-block">
+          <label for="support">How strongly does proximity to family or support network matter?</label>
+          <input id="support" name="support" type="range" min="1" max="5" value="3" />
+          <div class="range-value"><span id="supportValue">3</span>/5</div>
+        </div>
+        <div class="question-block">
+          <label for="identity">How much is identity or belonging part of the decision?</label>
+          <input id="identity" name="identity" type="range" min="1" max="5" value="3" />
+          <div class="range-value"><span id="identityValue">3</span>/5</div>
+        </div>
+        <div class="question-block">
+          <label for="urgency">How urgent does this feel now?</label>
+          <input id="urgency" name="urgency" type="range" min="1" max="5" value="3" />
+          <div class="range-value"><span id="urgencyValue">3</span>/5</div>
+        </div>
+
+        <button type="submit" class="btn full-width">See my assessment summary</button>
+      </form>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
