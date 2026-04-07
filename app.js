@@ -213,3 +213,28 @@ if (factorCheckboxes.length) {
     });
   });
 }
+
+
+// ── PILOT APPLICATION FORM SUBMIT ────────────────────────────
+const pilotForm = document.getElementById("pilotForm");
+
+if (pilotForm) {
+  pilotForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(pilotForm);
+
+    try {
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString(),
+      });
+
+      window.location.href = "/thank-you.html";
+    } catch (error) {
+      alert("Something went wrong. Please try again.");
+      console.error(error);
+    }
+  });
+}
