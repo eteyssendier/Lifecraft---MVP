@@ -1,5 +1,5 @@
 [build]
-  publish = "Lifecraft---MVP"
+  publish = "."
 
 [[redirects]]
   from = "/apply"
